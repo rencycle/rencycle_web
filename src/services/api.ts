@@ -3,7 +3,10 @@ import { notifyInfo } from './toastService'
 
 export const client = axios.create({
   // baseURL: import.meta.env.VITE_DEFAULT_GATEWAY_LOCAL as string
-  baseURL: import.meta.env.VITE_DEFAULT_GATEWAY_PROD as string
+  baseURL: import.meta.env.VITE_DEFAULT_GATEWAY_PROD as string,
+  headers: {
+    'Content-Type': 'application/json',
+  },
 })
 
 client.interceptors.request.use((config) => {
