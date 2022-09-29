@@ -11,5 +11,10 @@ module.exports = {
   ],
   parserOptions: {
     ecmaVersion: 'latest'
+  },
+  rules: {
+    'vue/multi-word-component-names': 0,
+    'vue/script-setup-uses-vars': 'error',
+    'linebreak-style': 0
   }
 }

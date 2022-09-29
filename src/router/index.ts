@@ -9,9 +9,33 @@ const router = createRouter({
       name: 'home',
       component: HomePage
     },
+    {
+      path: '/ecologist',
+      name: 'Ecologist',
+      component: () => import('@/pages/Ecologiest/Ecologist.vue')
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: () => import('@/pages/Login.vue')
+    },
+    {
+      path: '/facilities',
+      name: 'Facilities',
+      component: () => import('@/pages/Auditor/Facilities.vue')
+    },
+    {
+      path: '/facilities/auditor/:id',
+      name: 'Auditor',
+      component: () => import('@/pages/Auditor/Auditor.vue')
+    },
+    {
+      path: '/create-application',
+      name: 'CreateApplication',
+      component: () => import('@/pages/Ecologiest/CreateApplication.vue')
+    },
     /**
      * Other routes
-     * @see https://next.router.vuejs.org/guide/migration/#removed-star-or-catch-all-routes
      */
     {
       path: '/:pathMatch(.*)*',

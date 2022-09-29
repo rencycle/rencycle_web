@@ -1,41 +1,94 @@
-import type { IApplicationResponse } from '@/types'
 import type { AxiosResponse } from 'axios'
+import type {
+  IApplicationCreate,
+  IApplicationReport,
+  IApplicationResponse,
+  ICompany,
+  IFacility,
+  INomenklature,
+  ITransport
+} from '@/types'
 import { client } from './api'
 
-// mocks
 export const useApplications = {
+  /**
+   * Fetches all applications
+   * @returns a list of applications
+   */
   async fetchApplications() {
-    const res: AxiosResponse<IApplicationResponse[]> = await client.get('/applications')
+    const res: AxiosResponse<IApplicationResponse[]> = await client.get('api/get_orders/')
 
     return res
   },
-
+  /**
+   * Fetches a single application by id
+   * @param id - application id
+   * @returns A single application
+   */
   async fetchApplication(id: string) {
-    const res: AxiosResponse<IApplicationResponse> = await client.get(`/applications/${id}`)
+    const res: AxiosResponse<IApplicationResponse> = await client.get(`api/get_orders/${id}`)
 
     return res
   },
 
-  async createApplication(data: any) {
-    const res: AxiosResponse<IApplicationResponse> = await client.post('/applications', data)
+  /**
+   * Creates a new application
+   * @param payload - application payload
+   * @returns - A new application
+   */
+  async createApplication(payload: IApplicationCreate) {
+    const res: AxiosResponse<IApplicationCreate> = await client.post('api/orders/create_order/', payload)
 
     return res
   },
 
-  async updateApplication(id: string, data: any) {
-    const res: AxiosResponse<IApplicationResponse> = await client.put(`/applications/${id}`, data)
+  /**
+   * Fetches applications reports
+   * @param params - filter params
+   * @returns - report depending on params
+   */
+  async fetchApplicationReports(params: string): Promise<AxiosResponse<IApplicationReport[]>> {
+    const res: AxiosResponse<IApplicationReport[]> = await client.get('api/reports/' + params)
 
     return res
   },
 
-  async deleteApplication(id: string) {
-    const res: AxiosResponse<IApplicationResponse> = await client.delete(`/applications/${id}`)
+  /**
+   * Fetches all facilities
+   * @returns - list of facilities
+   */
+  async fetchFacilities(): Promise<AxiosResponse<IFacility[]>> {
+    const res: AxiosResponse<IFacility[]> = await client.get('api/get_facilities/')
 
     return res
   },
 
-  async fetchApplicationLogs(id: string) {
-    const res: AxiosResponse<IApplicationResponse> = await client.get(`/applications/${id}/logs`)
+  /**
+   * Fetches all companies
+   * @returns - list of companies
+   */
+  async fetchCompanies(): Promise<AxiosResponse<ICompany[]>> {
+    const res: AxiosResponse<ICompany[]> = await client.get('api/get_companies/')
+
+    return res
+  },
+
+  /**
+   * Fetches all nomenklatures
+   * @returns - list of nomenklatures
+   */
+  async fetchNomenklatures(): Promise<AxiosResponse<INomenklature[]>> {
+    const res: AxiosResponse<INomenklature[]> = await client.get('api/get_nomenklatures/')
+
+    return res
+  },
+
+  /**
+   * Fetch all transports
+   * @returns - list of transports
+   */
+  async fetchTransports(): Promise<AxiosResponse<ITransport[]>> {
+    const res: AxiosResponse<ITransport[]> = await client.get('api/get_transports/')
 
     return res
   }
